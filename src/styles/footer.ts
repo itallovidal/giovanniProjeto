@@ -1,6 +1,7 @@
 import { styled } from './theme.ts'
 
 export const FooterContainer = styled('footer', {
+  marginTop: '32px',
   display: 'flex',
   justifyContents: 'center',
   alignItems: 'center',
@@ -13,8 +14,8 @@ export const FooterContainer = styled('footer', {
   h1: {
     fontWeight: 'normal',
     fontSize: '1.5rem',
-    marginBlock: '4rem'
-,  },
+    marginBlock: '4rem',
+  },
 
   img: {
     width: '120px',

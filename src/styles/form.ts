@@ -1,6 +1,7 @@
 import { styled } from './theme.ts'
 
 export const FormContainer = styled('div', {
+  width: '100%',
   h1: {
     width: '100%',
     textAlign: 'center',
