@@ -32,7 +32,6 @@ interface IHabitualityForm {
 }
 
 function HabitualityForm({ updateRegistry }: IHabitualityForm) {
-  console.log(updateRegistry)
   const {
     register,
     control,
@@ -53,6 +52,8 @@ function HabitualityForm({ updateRegistry }: IHabitualityForm) {
     reset()
     updateRegistry(data)
   }
+
+  console.log(errors)
 
   return (
     <Form onSubmit={handleSubmit(submit)}>
@@ -95,7 +96,7 @@ function HabitualityForm({ updateRegistry }: IHabitualityForm) {
             <Input
               defaultValue={field.value}
               label={'Sistema'}
-              errorMessage={errors.system?.message}
+              errorMessage={errors.system && 'Informe o nome do sistema.'}
               key={field.id}
               hookForm={register(`system.${index}.value`)}
             />
@@ -103,7 +104,9 @@ function HabitualityForm({ updateRegistry }: IHabitualityForm) {
             <Input
               defaultValue={field.value}
               label={'Número de Registro'}
-              errorMessage={errors.registerNumber?.message}
+              errorMessage={
+                errors.registerNumber && 'Informe o número de registro.'
+              }
               key={field.id}
               hookForm={register(`registerNumber.${index}.value`)}
             />
@@ -112,7 +115,9 @@ function HabitualityForm({ updateRegistry }: IHabitualityForm) {
               defaultValue={field.value}
               key={field.id}
               hookForm={register(`launchDate.${index}.value`)}
-              errorMessage={errors.launchDate?.message}
+              errorMessage={
+                errors.launchDate && 'Informe o data de lançamento.'
+              }
               label={'Data Lançamento'}
             />
           </>

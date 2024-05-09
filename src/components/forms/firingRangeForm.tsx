@@ -12,6 +12,8 @@ function FiringRangeForm() {
     {} as TFiringRangeSchema,
   )
 
+  const [showTable, setShowTable] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -21,15 +23,15 @@ function FiringRangeForm() {
   })
 
   function submitData(data: TFiringRangeSchema) {
-    console.log(data)
     setFiringRangeData(data)
+    setShowTable((prev) => !prev)
   }
 
   return (
     <FormContainer>
       <h1>Dados da Entidade de Tiro Declarante</h1>
 
-      {firingRangeData.cnpj ? (
+      {showTable ? (
         <GenericTable data={firingRangeData} />
       ) : (
         <Form onSubmit={handleSubmit(submitData)}>
@@ -63,6 +65,12 @@ function FiringRangeForm() {
           <Button>Pronto</Button>
         </Form>
       )}
+
+      {showTable ? (
+        <Button onClick={() => setShowTable((prev) => !prev)}>
+          Voltar à edição
+        </Button>
+      ) : null}
     </FormContainer>
   )
 }

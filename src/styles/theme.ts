@@ -11,6 +11,12 @@ export const { styled, globalCss } = createStitches({
 })
 
 export const globalStyles = globalCss({
+  '@media print': {
+    button: {
+      display: 'none',
+    },
+  },
+
   '*': {
     margin: 0,
     padding: 0,

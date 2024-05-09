@@ -7,6 +7,7 @@ import SportyShooterForm from './components/forms/sportyShooterForm.tsx'
 import HabitualityContainer from './components/HabitualityContainer.tsx'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import { Button } from './styles/button.ts'
 function App() {
   globalStyles()
 
@@ -16,6 +17,7 @@ function App() {
       <FiringRangeForm />
       <SportyShooterForm />
       <HabitualityContainer />
+      <Button onClick={() => window.print()}>Imprimir</Button>
       <Footer />
       <ToastContainer />
     </main>

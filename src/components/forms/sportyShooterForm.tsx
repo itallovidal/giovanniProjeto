@@ -14,6 +14,8 @@ function SportyShooterForm() {
   const [sportyShooterData, setSportyShooterData] =
     useState<TSportyShooterSchema>({} as TSportyShooterSchema)
 
+  const [showTable, setShowTable] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -23,15 +25,15 @@ function SportyShooterForm() {
   })
 
   function submitData(data: TSportyShooterSchema) {
-    console.log(data)
     setSportyShooterData(data)
+    setShowTable((prev) => !prev)
   }
 
   return (
     <FormContainer>
       <h1>Dados do Atirador Desportivo</h1>
 
-      {sportyShooterData.cpf ? (
+      {showTable ? (
         <GenericTable data={sportyShooterData} />
       ) : (
         <Form onSubmit={handleSubmit(submitData)}>
@@ -82,6 +84,12 @@ function SportyShooterForm() {
           <Button>Pronto</Button>
         </Form>
       )}
+
+      {showTable ? (
+        <Button onClick={() => setShowTable((prev) => !prev)}>
+          Voltar à edição
+        </Button>
+      ) : null}
     </FormContainer>
   )
 }

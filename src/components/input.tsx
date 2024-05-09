@@ -9,6 +9,7 @@ interface InputProps extends ComponentProps<typeof TextInput> {
   errorMessage: string | undefined
 }
 function Input({ label, hookForm, errorMessage, ...props }: InputProps) {
+  console.log(errorMessage)
   return (
     <InputContainer>
       <label>{label}</label>
