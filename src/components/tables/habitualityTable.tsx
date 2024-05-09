@@ -45,11 +45,19 @@ function HabitualityTable({ data }: { data: THabitualitySchema[] }) {
               <TableData colSpan={4}> Data Lançamento </TableData>
             </TableRow>
 
-            <TableRow>
-              <TableData colSpan={4}> {registry.system} </TableData>
-              <TableData colSpan={4}> {registry.registerNumber} </TableData>
-              <TableData colSpan={4}> {registry.launchDate} </TableData>
-            </TableRow>
+            {registry.system.map((_, index) => (
+              <TableRow>
+                <TableData colSpan={4}>
+                  {registry.system[index].value}
+                </TableData>
+                <TableData colSpan={4}>
+                  {registry.registerNumber[index].value}
+                </TableData>
+                <TableData colSpan={4}>
+                  {registry.launchDate[index].value}
+                </TableData>
+              </TableRow>
+            ))}
           </>
         ))}
       </tbody>

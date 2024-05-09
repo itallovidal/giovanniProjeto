@@ -1,7 +1,7 @@
 import { DataContainer, Form, FormContainer } from '../../styles/form.ts'
 import Input from '../input.tsx'
 import { Button } from '../../styles/button.ts'
-import { useForm } from 'react-hook-form'
+import { useFieldArray, useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
@@ -11,17 +11,52 @@ import {
 } from '../../schemas/habitualitySchema.ts'
 import HabitualityTable from '../tables/habitualityTable.tsx'
 
+const defaultFormValues = {
+  system: [
+    {
+      value: '',
+    },
+  ],
+  registerNumber: [
+    {
+      value: '',
+    },
+  ],
+  launchDate: [
+    {
+      value: '',
+    },
+  ],
+}
+
 function HabitualityForm() {
   const [registers, setRegisters] = useState<THabitualitySchema[]>(
     [] as THabitualitySchema[],
   )
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<THabitualitySchema>({
     resolver: zodResolver(habitualitySchema),
+    defaultValues: defaultFormValues,
   })
+
+  const { fields: fieldsSystem, append: appendSystem } = useFieldArray({
+    control,
+    name: 'system',
+  })
+
+  // const { fields, append } = useFieldArray({
+  //   control,
+  //   name: 'system',
+  // })
+  //
+  // const { fields, append } = useFieldArray({
+  //   control,
+  //   name: 'system',
+  // })
 
   function submitData(data: THabitualitySchema) {
     console.log(data)
@@ -70,24 +105,37 @@ function HabitualityForm() {
 
             <h1>Registro de Habitualidade</h1>
 
-            <Input
-              errorMessage={errors.system?.message}
-              hookForm={register('system')}
-              label={'Sistema'}
-            />
+            {fieldsSystem.map((field, index) => (
+              <>
+                <Input
+                  defaultValue={field.value}
+                  label={'Sistema'}
+                  errorMessage={errors.system?.message}
+                  key={field.id}
+                  hookForm={register(`system.${index}.value`)}
+                />
 
-            <Input
-              errorMessage={errors.registerNumber?.message}
-              hookForm={register('registerNumber')}
-              label={'Número de Registro'}
-            />
+                <Input
+                  defaultValue={field.value}
+                  label={'Número de Registro'}
+                  errorMessage={errors.registerNumber?.message}
+                  key={field.id}
+                  hookForm={register(`registerNumber.${index}.value`)}
+                />
 
-            <Input
-              errorMessage={errors.launchDate?.message}
-              hookForm={register('launchDate')}
-              label={'Data Lançamento'}
-            />
+                <Input
+                  defaultValue={field.value}
+                  key={field.id}
+                  hookForm={register(`launchDate.${index}.value`)}
+                  errorMessage={errors.launchDate?.message}
+                  label={'Data Lançamento'}
+                />
+              </>
+            ))}
           </DataContainer>
+          <Button type={'button'} onClick={() => appendSystem({ value: '' })}>
+            Adicionar habitualidade
+          </Button>
           <Button>Pronto</Button>
         </Form>
       )}
