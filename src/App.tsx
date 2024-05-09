@@ -4,8 +4,9 @@ import { globalStyles } from './styles/theme.ts'
 import Footer from './components/footer.tsx'
 import FiringRangeForm from './components/forms/firingRangeForm.tsx'
 import SportyShooterForm from './components/forms/sportyShooterForm.tsx'
-import HabitualityForm from './components/forms/HabitualityForm.tsx'
-
+import HabitualityContainer from './components/HabitualityContainer.tsx'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 function App() {
   globalStyles()
 
@@ -14,8 +15,9 @@ function App() {
       <Header />
       <FiringRangeForm />
       <SportyShooterForm />
-      <HabitualityForm />
+      <HabitualityContainer />
       <Footer />
+      <ToastContainer />
     </main>
   )
 }

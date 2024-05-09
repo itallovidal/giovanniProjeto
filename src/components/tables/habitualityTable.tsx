@@ -2,7 +2,6 @@ import { Table, TableData, TableRow } from '../../styles/table/tableStyles.ts'
 import { THabitualitySchema } from '../../schemas/habitualitySchema.ts'
 
 function HabitualityTable({ data }: { data: THabitualitySchema[] }) {
-  console.log('oi')
   console.log(data)
   return (
     <Table>
